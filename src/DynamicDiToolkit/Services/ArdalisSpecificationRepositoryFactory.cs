@@ -21,23 +21,23 @@ public class ArdalisSpecificationRepositoryFactory : IArdalisSpecificationReposi
 		       ?? throw new InvalidOperationException($"Service for type {typeof(T).Name} not found.");
 	}
 
-	public object GetRepository(Type genericRepositoryTypeDefinition, string entityName)
+	public IRepositoryBase<object> GetRepository(string entityName)
 	{
 		var entityType = AppDomain.CurrentDomain.GetAssemblies()
 			.SelectMany(assembly => assembly.GetTypes())
 			.FirstOrDefault(type => type.Name.Equals(entityName, StringComparison.OrdinalIgnoreCase));
 
-		return GetRepositoryInternally(genericRepositoryTypeDefinition, entityType, entityName);
+		return GetRepositoryInternally(entityType, entityName);
 	}
 
-	public object GetRepository(Type genericRepositoryTypeDefinition, string entityName, string entitiesAssembly)
+	public IRepositoryBase<object> GetRepository(string entityName, string entitiesAssembly)
 	{
 		var assembly = AppDomain.CurrentDomain.GetAssemblies()
 			.FirstOrDefault(a => a.GetName().Name == entitiesAssembly);
 		var entityType = assembly?.GetTypes()
 			.FirstOrDefault(t => t.Name.Equals(entityName, StringComparison.OrdinalIgnoreCase));
 
-		return GetRepositoryInternally(genericRepositoryTypeDefinition, entityType, entityName);
+		return GetRepositoryInternally(entityType, entityName);
 	}
 
 	public IRepositoryBase<object> GetRepository(Type type)
@@ -52,25 +52,21 @@ public class ArdalisSpecificationRepositoryFactory : IArdalisSpecificationReposi
 		return (IRepositoryBase<object>)service;
 	}
 
-	private object GetRepositoryInternally(Type genericRepositoryTypeDefinition, Type? entityType, string entityName)
+	private IRepositoryBase<object> GetRepositoryInternally(Type? entityType, string entityName)
 	{
 		if (entityType == null)
 		{
 			throw new InvalidOperationException($"Entity type {entityName} not found.");
 		}
-		if (!genericRepositoryTypeDefinition.IsGenericTypeDefinition)
-		{
-			throw new ArgumentException("The provided type must be a generic type definition.", nameof(genericRepositoryTypeDefinition));
-		}
 
-		var specificRepositoryType = genericRepositoryTypeDefinition.MakeGenericType(entityType);
-		var repository = _serviceProvider.GetService(specificRepositoryType);
+		var repositoryGenericType = typeof(IRepositoryBase<>).MakeGenericType(entityType);
+		var repository = _serviceProvider.GetService(repositoryGenericType);
 
 		if (repository == null)
 		{
 			throw new InvalidOperationException($"Repository for entity type {entityName} not found.");
 		}
 
-		return repository;
+		return (IRepositoryBase<object>)repository;
 	}
 }
