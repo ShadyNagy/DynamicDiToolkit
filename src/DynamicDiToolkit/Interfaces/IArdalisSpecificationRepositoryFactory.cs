@@ -6,7 +6,7 @@ namespace DynamicDiToolkit.Interfaces;
 public interface IArdalisSpecificationRepositoryFactory
 {
 	IRepositoryBase<T> GetRepository<T>() where T : class;
-	IRepositoryBase<object> GetRepository(string className);
-	IRepositoryBase<object> GetRepository(string entityName, string entitiesAssembly);
+	object GetRepository(Type genericRepositoryTypeDefinition, string className);
+	object GetRepository(Type genericRepositoryTypeDefinition, string entityName, string entitiesAssembly);
 	IRepositoryBase<object> GetRepository(Type type);
 }
