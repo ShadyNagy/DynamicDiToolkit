@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>DynamicDiToolkit</id>
+    <title>Dynamic DI Toolkit</title>
+    <version>1.0.0</version>
+    <authors>ShadyNagy</authors>
+    <description>
+		Dynamic DI Toolkit Package
+	</description>
+    <dependencies>
+      <group targetFramework=".NET7.0">
+        <dependency id="Microsoft.Extensions.DependencyInjection" version="7.0.0" />
+        <dependency id="Ardalis.Specification" version="7.0.0" />
+      </group>
+    </dependencies>
+    <packageType name="Dependency" />
+    <language>en-US</language>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/ShadyNagy/DynamicDiToolkit</projectUrl>
+    <repository type="git" url="https://github.com/ShadyNagy/DynamicDiToolkit" />
+    <releaseNotes>DynamicDiToolkit Package.</releaseNotes>
+    <tags>DynamicDiToolkit, DI, Ardalis Specification, dependency injection, service, services</tags>
+    <icon>icon.png</icon>
+    <copyright>Copyright 2024 (c) ShadyNagy. All rights reserved.</copyright>
+    <readme>README.md</readme>
+  </metadata>
+  <files>
+    <file src="src\DynamicDiToolkit\bin\Release\net7.0\DynamicDiToolkit.dll" target="lib\net7.0" />
+    <file src="icon.png" />
+    <file src="README.md" />
+  </files>
+</package>

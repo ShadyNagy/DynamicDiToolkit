@@ -1,0 +1,34 @@
+name: Publish DynamicDiToolkit to NuGet
+
+on:
+  push:
+    branches:
+      - main # Your default release branch
+    paths:
+      - 'src/DynamicDiToolkit/**'
+
+jobs:
+  publish:
+    name: Build and Publish
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Required for a specific dotnet version that doesn't come with ubuntu-latest / windows-latest
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+      
+      # Restore
+      - name: Dotnet restore
+        run: dotnet restore src/DynamicDiToolkit/DynamicDiToolkit.csproj
+
+      # Publish
+      - name: Create the package
+        run: dotnet pack -c Release -o . src/DynamicDiToolkit/DynamicDiToolkit.csproj
+        
+      - name: Publish to nuget.org
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: nuget push DynamicDiToolkit.*.nupkg -src https://api.nuget.org/v3/index.json ${{secrets.NUGET_API_KEY}}
