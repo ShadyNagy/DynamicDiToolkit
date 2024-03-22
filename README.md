@@ -8,6 +8,29 @@
 
 # Dynamic DI Toolkit
 
+## Problem Statement
+
+In modern software development, particularly within complex projects, managing dependencies can become cumbersome and rigid, leading to challenges in maintaining, testing, and evolving the application architecture. Traditional Dependency Injection (DI) practices, while powerful, often require a static setup that does not easily adapt to changing requirements or dynamic runtime conditions. This can lead to:
+
+- **Tight coupling** between components, making it hard to swap implementations or integrate third-party services dynamically.
+- **Complex configuration** setups, where changes to the DI container require extensive manual adjustments.
+- **Limited flexibility** in scenarios where dependencies need to be resolved based on runtime data or when integrating plugins and modular systems.
+- **Difficulties in testing**, especially when trying to mock or replace services for integration or unit tests without affecting the overall DI setup.
+
+Developers need a solution that brings more flexibility and dynamism to dependency injection, allowing applications to be more modular, easier to maintain, and ready to adapt to new requirements as they arise.
+
+## The Solution: Dynamic DI Toolkit
+
+`DynamicDiToolkit` addresses these challenges by providing a dynamic dependency injection framework designed for .NET applications. It enables developers to:
+
+- **Dynamically register and resolve dependencies** based on runtime conditions, making the application more adaptable and modular.
+- **Simplify the configuration** of the DI container, with support for automatic registration and resolution strategies that reduce boilerplate code.
+- **Enhance testing capabilities**, allowing for easy swapping of implementations in tests without overhauling the DI setup, facilitating both unit and integration testing.
+- **Improve maintainability and scalability** of projects, by enabling a cleaner, more flexible approach to managing dependencies.
+
+By leveraging `DynamicDiToolkit`, developers can overcome the limitations of traditional DI mechanisms, paving the way for more dynamic, maintainable, and testable applications.
+
+
 In the program/startup
 ```csharp
 services.AddScopedDynamicDiToolkitServices();

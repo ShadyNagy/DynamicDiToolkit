@@ -38,4 +38,5 @@ public interface IServiceFactory
 	/// <param name="type">The entity type for which to retrieve the service.</param>
 	/// <returns>A service instance for the specified type.</returns>
 	object GetService(Type type);
+
 }
