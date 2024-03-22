@@ -66,7 +66,7 @@ public class TestEndpoint : EndpointBaseAsync
     public override async Task<ActionResult<string>> HandleAsync([FromBody] Request request, CancellationToken cancellationToken = default)
     {
         // Dynamically resolve the service based on the entity name provided in the request
-        dynamic service = _serviceFactory.GetService(typeof(IService<>), request.EntityName);
+        dynamic service = _serviceFactory.GetService(typeof(IRepository<>), request.EntityName);
         // Call the ListAsync method on the resolved service
         var response = await service.ListAsync(cancellationToken);
 
