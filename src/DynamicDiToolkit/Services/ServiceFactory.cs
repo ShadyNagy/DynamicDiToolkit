@@ -30,7 +30,7 @@ public class ServiceFactory : IServiceFactory
 	/// <exception cref="InvalidOperationException">Thrown if the service for the specified type is not found.</exception>
 	public T GetService<T>() where T : class
 	{
-		var serviceType = typeof(IServiceBase<T>);
+		var serviceType = typeof(T);
 		return (T)_serviceProvider.GetService(serviceType)!
 					 ?? throw new InvalidOperationException($"Service for type {typeof(T).Name} not found.");
 	}
@@ -75,8 +75,7 @@ public class ServiceFactory : IServiceFactory
 	/// <exception cref="InvalidOperationException">Thrown if the service for the specified type is not found.</exception>
 	public object GetService(Type type)
 	{
-		var repoType = typeof(IServiceBase<>).MakeGenericType(type);
-		var service = _serviceProvider.GetService(repoType);
+		var service = _serviceProvider.GetService(type);
 		if (service == null)
 		{
 			throw new InvalidOperationException($"Service for type {type.Name} not found.");

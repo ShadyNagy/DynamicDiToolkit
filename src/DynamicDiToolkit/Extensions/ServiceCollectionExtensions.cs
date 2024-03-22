@@ -8,7 +8,7 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddSingletonDynamicDiToolkitServices(this IServiceCollection services)
 	{
 		services.AddSingleton<IArdalisSpecificationRepositoryFactory, ArdalisSpecificationRepositoryFactory>();
-		services.AddSingleton<IRepositoryFactory, RepositoryFactory>();
+		services.AddSingleton<IServiceFactory, ServiceFactory>();
 
 		return services;
 	}
@@ -16,7 +16,7 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddScopedDynamicDiToolkitServices(this IServiceCollection services)
 	{
 		services.AddScoped<IArdalisSpecificationRepositoryFactory, ArdalisSpecificationRepositoryFactory>();
-		services.AddScoped<IRepositoryFactory, RepositoryFactory>();
+		services.AddScoped<IServiceFactory, ServiceFactory>();
 
 		return services;
 	}
@@ -24,7 +24,7 @@ public static class ServiceCollectionExtensions
 	public static IServiceCollection AddTransientDynamicDiToolkitServices(this IServiceCollection services)
 	{
 		services.AddTransient<IArdalisSpecificationRepositoryFactory, ArdalisSpecificationRepositoryFactory>();
-		services.AddTransient<IRepositoryFactory, RepositoryFactory>();
+		services.AddTransient<IServiceFactory, ServiceFactory>();
 
 		return services;
 	}

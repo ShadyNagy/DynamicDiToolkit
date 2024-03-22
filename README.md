@@ -19,18 +19,18 @@ public class TestEndpoint : EndpointBaseAsync
 	.WithoutRequest
 	.WithResult<ActionResult<List<Entity>>>
 {
-	private readonly IRepositoryFactory _repositoryFactory;
+	private readonly IServiceFactory _serviceFactory;
 
-	public TestEndpoint(IRepositoryFactory repositoryFactory)
+	public TestEndpoint(IServiceFactory serviceFactory)
 	{
-		_repositoryFactory = repositoryFactory;
+		_serviceFactory = serviceFactory;
 	}
 
 	[HttpGet("test")]
 	public override async Task<ActionResult<string>> HandleAsync(CancellationToken cancellationToken = default)
 	{
 
-		dynamic service = _repositoryFactory.GetRepository(typeof(IRepository<>), nameof(Entity));
+		dynamic service = _serviceFactory.GetService(typeof(IService<>), nameof(Entity));
 		var response = await service.ListAsync(cancellationToken);
 
 		return Ok(response);
