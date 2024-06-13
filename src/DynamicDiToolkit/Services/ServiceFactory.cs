@@ -41,11 +41,18 @@ public class ServiceFactory : IServiceFactory
 	/// <param name="genericServiceTypeDefinition">The generic service type definition.</param>
 	/// <param name="entityName">The name of the entity.</param>
 	/// <returns>A service instance for the specified entity.</returns>
-	public object GetService(Type genericServiceTypeDefinition, string entityName)
+	public object GetService(Type genericServiceTypeDefinition, string entityName, string? namespaceName = null)
 	{
 		var entityType = AppDomain.CurrentDomain.GetAssemblies()
 			.SelectMany(assembly => assembly.GetTypes())
 			.FirstOrDefault(type => type.Name.Equals(entityName, StringComparison.OrdinalIgnoreCase));
+
+		if (!string.IsNullOrEmpty(namespaceName))
+		{
+			entityType = AppDomain.CurrentDomain.GetAssemblies()
+			.SelectMany(assembly => assembly.GetTypes())
+			.FirstOrDefault(type => type.Namespace != null && type.Namespace.Equals(namespaceName, StringComparison.OrdinalIgnoreCase) && type.Name.Equals(entityName, StringComparison.OrdinalIgnoreCase));
+		}
 
 		return GetServiceInternally(genericServiceTypeDefinition, entityType, entityName);
 	}
@@ -57,12 +64,18 @@ public class ServiceFactory : IServiceFactory
 	/// <param name="entityName">The name of the entity.</param>
 	/// <param name="entitiesAssembly">The name of the assembly containing the entity.</param>
 	/// <returns>A service instance for the specified entity.</returns>
-	public object GetService(Type genericServiceTypeDefinition, string entityName, string entitiesAssembly)
+	public object GetService(Type genericServiceTypeDefinition, string entityName, string entitiesAssembly, string? namespaceName = null)
 	{
 		var assembly = AppDomain.CurrentDomain.GetAssemblies()
 			.FirstOrDefault(a => a.GetName().Name == entitiesAssembly);
 		var entityType = assembly?.GetTypes()
 			.FirstOrDefault(t => t.Name.Equals(entityName, StringComparison.OrdinalIgnoreCase));
+
+		if (!string.IsNullOrEmpty(namespaceName))
+		{
+			entityType = assembly?.GetTypes()
+			.FirstOrDefault(t => t.Namespace != null && t.Namespace.Equals(namespaceName, StringComparison.OrdinalIgnoreCase) && t.Name.Equals(entityName, StringComparison.OrdinalIgnoreCase));
+		}
 
 		return GetServiceInternally(genericServiceTypeDefinition, entityType, entityName);
 	}
