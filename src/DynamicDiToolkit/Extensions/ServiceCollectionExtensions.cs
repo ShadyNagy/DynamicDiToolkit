@@ -20,6 +20,9 @@ public static class ServiceCollectionExtensions
 	{
 		services.AddSingleton<IArdalisSpecificationRepositoryFactory, ArdalisSpecificationRepositoryFactory>();
 		services.AddSingleton<IServiceFactory, ServiceFactory>();
+		services.AddSingleton<ITypeResolver, TypeResolver>();
+		services.AddSingleton<INewtonsoftJsonDeserializer, NewtonsoftJsonDeserializer>();
+		services.AddSingleton<ISystemTextJsonDeserializer, SystemTextJsonDeserializer>();
 
 		return services;
 	}
@@ -36,6 +39,9 @@ public static class ServiceCollectionExtensions
 	{
 		services.AddScoped<IArdalisSpecificationRepositoryFactory, ArdalisSpecificationRepositoryFactory>();
 		services.AddScoped<IServiceFactory, ServiceFactory>();
+		services.AddScoped<ITypeResolver, TypeResolver>();
+		services.AddScoped<INewtonsoftJsonDeserializer, NewtonsoftJsonDeserializer>();
+    services.AddScoped<ISystemTextJsonDeserializer, SystemTextJsonDeserializer>();
 
 		return services;
 	}
@@ -51,6 +57,9 @@ public static class ServiceCollectionExtensions
 	{
 		services.AddTransient<IArdalisSpecificationRepositoryFactory, ArdalisSpecificationRepositoryFactory>();
 		services.AddTransient<IServiceFactory, ServiceFactory>();
+		services.AddTransient<ITypeResolver, TypeResolver>();
+		services.AddTransient<INewtonsoftJsonDeserializer, NewtonsoftJsonDeserializer>();
+		services.AddTransient<ISystemTextJsonDeserializer, SystemTextJsonDeserializer>();
 
 		return services;
 	}
