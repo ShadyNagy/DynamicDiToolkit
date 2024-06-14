@@ -3,8 +3,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DynamicDiToolkit.Extensions;
 
+/// <summary>
+/// Provides extension methods for the <see cref="DbContext"/> class.
+/// </summary>
 public static class DbContextExtensions
 {
+	/// <summary>
+	/// Gets the entity type associated with the specified table name and schema.
+	/// </summary>
+	/// <param name="context">The <see cref="DbContext"/> instance.</param>
+	/// <param name="tableName">The name of the table.</param>
+	/// <param name="schema">The schema of the table. If null, defaults to 'dbo'.</param>
+	/// <returns>The <see cref="Type"/> of the entity associated with the specified table name and schema, or null if not found.</returns>
 	public static Type? GetEntityTypeByTableNameAndSchema(this DbContext context, string tableName, string? schema = null)
 	{
 		var entityTypes = context.Model.GetEntityTypes();
@@ -25,3 +35,4 @@ public static class DbContextExtensions
 		return null;
 	}
 }
+
