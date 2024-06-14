@@ -23,6 +23,7 @@ public static class ServiceCollectionExtensions
 		services.AddSingleton<ITypeResolver, TypeResolver>();
 		services.AddSingleton<INewtonsoftJsonDeserializer, NewtonsoftJsonDeserializer>();
 		services.AddSingleton<ISystemTextJsonDeserializer, SystemTextJsonDeserializer>();
+		services.AddSingleton(typeof(EntityService<>));
 
 		return services;
 	}
@@ -42,6 +43,7 @@ public static class ServiceCollectionExtensions
 		services.AddScoped<ITypeResolver, TypeResolver>();
 		services.AddScoped<INewtonsoftJsonDeserializer, NewtonsoftJsonDeserializer>();
     services.AddScoped<ISystemTextJsonDeserializer, SystemTextJsonDeserializer>();
+		services.AddScoped(typeof(EntityService<>));
 
 		return services;
 	}
@@ -60,6 +62,7 @@ public static class ServiceCollectionExtensions
 		services.AddTransient<ITypeResolver, TypeResolver>();
 		services.AddTransient<INewtonsoftJsonDeserializer, NewtonsoftJsonDeserializer>();
 		services.AddTransient<ISystemTextJsonDeserializer, SystemTextJsonDeserializer>();
+		services.AddTransient(typeof(EntityService<>));
 
 		return services;
 	}
