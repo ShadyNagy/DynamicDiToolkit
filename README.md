@@ -3,7 +3,7 @@
 [![NuGet](https://img.shields.io/nuget/dt/DynamicDiToolkit)](https://www.nuget.org/packages/DynamicDiToolkit)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/ShadyNagy/DynamicDiToolkit/blob/main/LICENSE)
 [![paypal](https://img.shields.io/badge/PayPal-tip%20me-green.svg?logo=paypal)](https://www.paypal.me/shadynagy)
-[![Visit My Website](https://img.shields.io/badge/Visit-My%20Website-blue?logo=internetexplorer)](https://ShadyNagy.com)
+[![Sponsor](https://img.shields.io/badge/Sponsor-ShadyNagy-brightgreen?logo=github-sponsors)](https://github.com/sponsors/ShadyNagy)
 
 
 # Dynamic DI Toolkit
